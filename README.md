@@ -32,3 +32,6 @@ For you to be able to follow this workflow;
 ## Bugs
 There are no known bugs, but incase of any feel free to reach any collaborators of this repository.
 
+## LICENSE
+[MIT](https://github.com/BryanAbuchery/16S-Qiime2-2020.8-E2E-/blob/main/LICENSE)
+

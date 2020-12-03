@@ -13,7 +13,6 @@ bash scripts/download.sh
 #Check the following link for more information about formating your link https://docs.qiime2.org/2020.8/ or consult
 # someone in the lab for more info.
 
-#Do FastQc
 
 cd sample_data/
 
@@ -23,6 +22,7 @@ sed -e '1s/sample/sample-id/' metadata.tsv >> metadata1.tsv
 rm practice.dataset1.metadata.tsv && rm metadata.tsv
 mv metadata1.tsv practice.dataset1.metadata.tsv
 
+#Do FastQc
 
 fastqc *.fastq
 mkdir fastqc_results
@@ -82,6 +82,7 @@ qiime tools import \
 
 
 #Quality Control
+#If your sequences were demultiplexed, the input file here would be demux.qza
 qiime quality-filter q-score \
 --i-demux PE_demux.qza \
 --o-filtered-sequences demux-filtered.qza \

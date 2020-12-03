@@ -19,7 +19,7 @@ For you to be able to follow this workflow;
 
 2. Activate the Qiime2 environment to conda install fastqc through [clicking here](https://anaconda.org/bioconda/fastqc). Alternatively, there is a .yml Qiime2-2020.8 environment on this repo. After cloning the repo, on the terminal; `cd` into "Qiime2_env" and bash `conda create -f Qiime2_env.yml` After running successfully, bash `conda activate Qiime2-2020.8`
 
-3. Git clone this repo.
+3. Git clone this repo https://github.com/BryanAbuchery/16S-Qiime2-2020.8-E2E-.git
 
 4. To download dataset and metadata used in this mock analysis and run, `cd 16S-Qiime2-2020.8-E2E- && bash scripts/16srna.sh` However, remember that you need to be on a HPC because Training Classifiers with Qiime2 is resource-intensive.
 

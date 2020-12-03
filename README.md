@@ -27,4 +27,8 @@ For you to be able to follow this workflow;
 
 6. You can also follow your own 16S or other Microbiome Analyses through following [this Phyloseq tutorial](https://vaulot.github.io/tutorials/Phyloseq_tutorial.html)
 
-7. Please ensure that you read the documentation for each of the scripts used. The automatic manifest file maker was adapted [from this repo](https://github.com/Micro-Biology/BasicBashCode/blob/master/BasicScripts/Q2_manifest_maker.py)
+7. Please ensure that you read the documentation for each of the scripts used. The automatic manifest file maker was adapted [from this repo](https://github.com/Micro-Biology/BasicBashCode/blob/master/BasicScripts/Q2_manifest_maker.py) The script that exports Qiime2 artifacts into objects that can be used with phyloseq was adopted from [this tutorial](http://john-quensen.com/tutorials/processing-16s-sequences-with-qiime2-and-dada2/) More information about importing dada2 artifacts into phyloseq can also be obtained [from here.](http://john-quensen.com/r/import-dada2-asv-tables-into-phyloseq/)
+
+## Bugs
+There are no known bugs, but incase of any feel free to reach any collaborators of this repository.
+

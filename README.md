@@ -21,7 +21,7 @@ For you to be able to follow this workflow;
 
 3. Git clone this repo https://github.com/BryanAbuchery/16S-Qiime2-2020.8-E2E-.git
 
-4. To download dataset and metadata used in this mock analysis and run, `cd 16S-Qiime2-2020.8-E2E- && bash scripts/16srna.sh` However, remember that you need to be on a HPC because Training Classifiers with Qiime2 is resource-intensive.
+4. To download dataset and metadata used in this mock analysis and run, `cd 16S-Qiime2-2020.8-E2E- && bash scripts/16srna.sh` However, remember that you need to be on a HPC because Training Classifiers with Qiime2 is resource-intensive. You can also just move the scripts directory to HPC and `bash scripts/16srna.sh` Remember to module avail Qiime and FastQc. If they aren't available, please contact your system administrator.
 
 5. Some people prefer to have their downstream downstream analysis done with R. Make sure you have installed the latest R version and then install Phyloseq. Phyloseq is an R package that lets you explore microbiome profiles using R. You can read more about [it here](https://joey711.github.io/phyloseq/). Install Phyloseq through first installing the [Bioconductor package](https://bioconductor.org/install/) and then install Phyloseq itself [through here](http://bioconductor.org/packages/release/bioc/html/phyloseq.html)
 

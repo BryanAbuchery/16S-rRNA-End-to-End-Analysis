@@ -215,7 +215,7 @@ qiime diversity beta-group-significance \
 #Taxonomic Assignment
 
 #Pick a reference database, there are different reference databases like shown below (not complete list)
-#Greengenes: 16S : https://greengenes.secondgenome.com/
+#Greengenes: 16S : ftp://greengenes.microbio.me/greengenes_release/gg_13_5/gg_13_8_otus.tar.gz
 #Silva: 16S/18S : https://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_132_release.zi
 #RDP: 16S/18S/28S : http://rdp.cme.msu.edu/
 #UNITE: ITS : https://unite.ut.ee/
@@ -225,45 +225,40 @@ qiime diversity beta-group-significance \
 #Train a classifier algorithm to assign taxonomies to sequences(always good to have your own trained classifier)
 #Run the classifier algorithm on your sequence features
 
-#Download the database
+#Download the database (both greengenes and SILVA)
+#Dealer's choice
+
 cd ..
 wget https://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_132_release.zip
 
 unzip
 unzip Silva_132_release.zip
 
+wget ftp://greengenes.microbio.me/greengenes_release/gg_13_5/gg_13_8_otus.tar.gz
+gunzip gg_13_8_otus.tar.gz
+tar -xvf gg_13_8_otus.tar
+
+
 #Copy the files we want into working directory
+#From SILVA
 cp SILVA_132_QIIME_release/rep_set/rep_set_16S_only/99/silva_132_99_16S.fna sample_data/
 cp SILVA_132_QIIME_release/taxonomy/16S_only/99/taxonomy_all_levels.txt sample_data/
 
+#From Greengenes
+cp gg_13_8_otus/rep_set/99_otus.fasta sample_data/
+cp gg_13_8_otus/taxonomy/99_otu_taxonomy.txt
+
+
 cd sample_data
 
-#Training feature classifiers with q2-feature-classifier
-#Import the reference data sets
-qiime tools import \
---type 'FeatureData[Sequence]' \
---input-path silva_132_99_16S.fna \
---output-path silva_132_99.qza
+#Train your classifier using either SILVA or Greengenes
+#DONT USE BOTH!
 
-qiime tools import \
---type 'FeatureData[Taxonomy]' \
---input-format HeaderlessTSVTaxonomyFormat \
---input-path taxonomy_all_levels.txt \
---output-path ref-taxonomy.qza
+#Train classifier using SILVA
+#bash ../scripts/train_classifier_silva.sh
 
-#Extract reference reads
-#The primers used here are from the ones used during your sequencing
-qiime feature-classifier extract-reads \
---i-sequences silva_132_99.qza \
---p-f-primer GTGCCAGCMGCCGCGGTAA \
---p-r-primer GGACTACHVGGGTWTCTAAT \
---o-reads ref-seqs.qza
-
-#Train the classifier
-qiime feature-classifier fit-classifier-naive-bayes \
---i-reference-reads ref-seqs.qza \
---i-reference-taxonomy ref-taxonomy.qza \
---o-classifier classifier.qza
+#Train Classifier using Greengenes
+bash ../scripts/train_classifier_gg.sh
 
 #Assign Taxonomy
 qiime feature-classifier classify-sklearn \
@@ -284,5 +279,6 @@ qiime taxa barplot \
 #Qiime may not offer all the analysis you want.
 #For publication-worthy analysis reports, you may consider using R.
 #You can utilize Phyloseq, an R package to Explore Microbiome profiles using R
+
 #Export to phyloseq objects
 bash ../scripts/phyloseq.sh

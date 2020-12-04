@@ -1,5 +1,5 @@
 # 16S-Qiime2-2020.8-E2E-
-Qiime2 is one of the latest tools used in 16S RNA analysis. The current Qiime2 supports End to End 16S RNA analysis, among other analyses.
+Qiime2 is one of the latest tools used in 16S End to End RNA analysis. The current Qiime2 supports End to End 16S RNA analysis, among other analyses.
 
 ## 16S RNA
 
@@ -21,7 +21,7 @@ For you to be able to follow this workflow;
 
 3. Git clone this repo https://github.com/BryanAbuchery/16S-Qiime2-2020.8-E2E-.git
 
-4. To download dataset and metadata used in this mock analysis and run, `cd 16S-Qiime2-2020.8-E2E- && bash scripts/16srna.sh` However, remember that you need to be on a HPC because Training Classifiers with Qiime2 is resource-intensive. You can also just move the scripts directory to HPC and `bash scripts/16srna.sh` Remember to module avail Qiime and FastQc. If they aren't available, please contact your system administrator.
+4. To download dataset and metadata used in this mock analysis and run, `cd 16S-Qiime2-2020.8-E2E- && bash scripts/16srna.sh` However, Training Classifiers with Qiime2 for the SILVA database is resource-intensive. It requires you to be logged onto a HPC. You can move the scripts directory to HPC and `bash scripts/16srna.sh` if you decide to use the SILVA database. Remember to module avail Qiime and FastQc before you bash. If they aren't available, please contact your system administrator. For the purposes of this mock analysis, the Greengenes database was used. The script can work with most local computers and is not as resource-intensive as the SILVA database.
 
 5. Some people prefer to have their downstream downstream analysis done with R. Make sure you have installed the latest R version and then install Phyloseq. Phyloseq is an R package that lets you explore microbiome profiles using R. You can read more about [it here](https://joey711.github.io/phyloseq/). Install Phyloseq through first installing the [Bioconductor package](https://bioconductor.org/install/) and then install Phyloseq itself [through here](http://bioconductor.org/packages/release/bioc/html/phyloseq.html)
 

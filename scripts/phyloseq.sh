@@ -39,3 +39,13 @@ qiime tools export \
 cd phyloseq
 mv tree.nwk rooted_tree.nwk
 cd ../
+
+#Export taxonomy table
+qiime tools export \
+--input-path taxonomy.qza \
+--output-path phyloseq
+
+#Copy the metadata file into phyloseq too (required)
+cp practice.dataset1.metadata.tsv phyloseq/
+
+

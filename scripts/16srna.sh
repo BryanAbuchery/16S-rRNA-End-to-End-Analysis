@@ -219,7 +219,7 @@ qiime diversity beta-group-significance \
 #Silva: 16S/18S : https://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_132_release.zi
 #RDP: 16S/18S/28S : http://rdp.cme.msu.edu/
 #UNITE: ITS : https://unite.ut.ee/
-#In this case we will use the Silva 132 release database.
+#In this case we will use the Greengenes 13_8 release database.
 
 
 #Train a classifier algorithm to assign taxonomies to sequences(always good to have your own trained classifier)

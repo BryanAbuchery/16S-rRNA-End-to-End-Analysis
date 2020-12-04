@@ -246,7 +246,7 @@ cp SILVA_132_QIIME_release/taxonomy/16S_only/99/taxonomy_all_levels.txt sample_d
 
 #From Greengenes
 cp gg_13_8_otus/rep_set/99_otus.fasta sample_data/
-cp gg_13_8_otus/taxonomy/99_otu_taxonomy.txt
+cp gg_13_8_otus/taxonomy/99_otu_taxonomy.txt sample_data/
 
 
 cd sample_data

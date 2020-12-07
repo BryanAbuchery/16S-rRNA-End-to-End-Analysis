@@ -224,33 +224,6 @@ qiime diversity beta-group-significance \
 
 #Train a classifier algorithm to assign taxonomies to sequences(always good to have your own trained classifier)
 #Run the classifier algorithm on your sequence features
-
-#Download the database (both greengenes and SILVA)
-#Dealer's choice
-
-cd ..
-wget https://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_132_release.zip
-
-unzip
-unzip Silva_132_release.zip
-
-wget ftp://greengenes.microbio.me/greengenes_release/gg_13_5/gg_13_8_otus.tar.gz
-gunzip gg_13_8_otus.tar.gz
-tar -xvf gg_13_8_otus.tar
-
-
-#Copy the files we want into working directory
-#From SILVA
-cp SILVA_132_QIIME_release/rep_set/rep_set_16S_only/99/silva_132_99_16S.fna sample_data/
-cp SILVA_132_QIIME_release/taxonomy/16S_only/99/taxonomy_all_levels.txt sample_data/
-
-#From Greengenes
-cp gg_13_8_otus/rep_set/99_otus.fasta sample_data/
-cp gg_13_8_otus/taxonomy/99_otu_taxonomy.txt sample_data/
-
-
-cd sample_data
-
 #Train your classifier using either SILVA or Greengenes
 #DONT USE BOTH!
 
@@ -273,8 +246,8 @@ qiime metadata tabulate \
 qiime taxa barplot \
 --i-table deblur-table.qza \
 --i-taxonomy taxonomy.qza \
---m-metadata-file practice.dataset1.metadata.tsv
---o-visualization taxa-bar-plot.qzv
+--m-metadata-file practice.dataset1.metadata.tsv \
+--o-visualization taxa-barplot.qzv
 
 #Qiime may not offer all the analysis you want.
 #For publication-worthy analysis reports, you may consider using R.

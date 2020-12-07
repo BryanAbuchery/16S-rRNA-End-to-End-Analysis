@@ -1,5 +1,21 @@
 #! usr/env/bin/bash
 
+
+cd ..
+#Download SILVA database to train classifier
+wget https://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_132_release.zip
+
+unzip
+unzip Silva_132_release.zip
+
+#Copy the files we want into working directory
+#From SILVA
+cp SILVA_132_QIIME_release/rep_set/rep_set_16S_only/99/silva_132_99_16S.fna sample_data/
+cp SILVA_132_QIIME_release/taxonomy/16S_only/99/taxonomy_all_levels.txt sample_data/
+
+
+cd sample_data/
+
 #Training feature classifiers with q2-feature-classifier
 #Import the reference data sets
 qiime tools import \

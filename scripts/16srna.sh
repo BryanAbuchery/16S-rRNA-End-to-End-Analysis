@@ -44,7 +44,7 @@ for i in *.gz; do mv "$i" "`echo $i | sed 's/_/./'`"; done
 #Automate making a manifest file using Q2_manifest_maker.py
 #Further information about Q2_manifest_maker.py can be found on this repo:
 # : https://github.com/Micro-Biology/BasicBashCode/blob/master/BasicScripts/Q2_manifest_maker.py
-python ../scripts/Q2_manifest_maker.py --input_dir /home/icipe/Desktop/BRYAN/tests/sample_data
+python ../scripts/Q2_manifest_maker.py --input_dir ./
 sort Manifest.csv >> sorted.csv
 sed '$d' sorted.csv | sed -i '1s/^/sample-id,absolute-filepath,direction\n/' sorted.csv
 sed '$d' sorted.csv >> ready.csv

@@ -2,6 +2,7 @@
 
 #Downloads the practice data set and metadata
 mkdir -p sample_data
+
 cd sample_data/
 
 #Download the practice dataset

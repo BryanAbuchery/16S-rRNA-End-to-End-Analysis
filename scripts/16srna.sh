@@ -129,7 +129,7 @@ qiime feature-table tabulate-seqs \
 #--p-trim-left-r 9 \
 #--p-trunc-len-f 220 \
 #--p-trunc-len-r 200 \
-#--p-n-threads 0 \ #Depending on the cores available.
+#--p-n-threads 0
 
 
 #Phylogenetics

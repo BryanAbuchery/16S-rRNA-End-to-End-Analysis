@@ -14,8 +14,6 @@ bash scripts/download.sh
 # someone in the lab for more info.
 
 
-cd sample_data/
-
 #Format the practice metadata file into a Qiime compartible object
 awk 'NR==1{$0=tolower($0)} 1' practice.dataset1.metadata.tsv >> metadata.tsv
 sed -e '1s/sample/sample-id/' metadata.tsv >> metadata1.tsv

@@ -1,7 +1,6 @@
 #! usr/env/bin/bash
 
 
-cd ..
 #Download SILVA database to train classifier
 wget https://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_132_release.zip
 

@@ -1,8 +1,6 @@
 #! usr/env/bin/bash
 
 
-cd ..
-
 #Download the Greengenes database to train classifier
 
 wget ftp://greengenes.microbio.me/greengenes_release/gg_13_5/gg_13_8_otus.tar.gz

@@ -14,8 +14,6 @@ bash scripts/download.sh
 # someone in the lab for more info.
 
 
-cd sample_data/
-
 #Format the practice metadata file into a Qiime compartible object
 awk 'NR==1{$0=tolower($0)} 1' practice.dataset1.metadata.tsv >> metadata.tsv
 sed -e '1s/sample/sample-id/' metadata.tsv >> metadata1.tsv
@@ -229,6 +227,8 @@ qiime diversity beta-group-significance \
 
 #Train classifier using SILVA
 #bash ../scripts/train_classifier_silva.sh
+
+cd ..
 
 #Train Classifier using Greengenes
 bash ../scripts/train_classifier_gg.sh

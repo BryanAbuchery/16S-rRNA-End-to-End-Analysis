@@ -13,8 +13,10 @@ bash scripts/download.sh
 #Check the following link for more information about formating your link https://docs.qiime2.org/2020.8/ or consult
 # someone in the lab for more info.
 
+cd sample_data/
 
 #Format the practice metadata file into a Qiime compartible object
+
 awk 'NR==1{$0=tolower($0)} 1' practice.dataset1.metadata.tsv >> metadata.tsv
 sed -e '1s/sample/sample-id/' metadata.tsv >> metadata1.tsv
 rm practice.dataset1.metadata.tsv && rm metadata.tsv
@@ -30,6 +32,7 @@ for zip in *.zip; do unzip $zip; done
 cat */summary.txt >> fastqc_summary.txt
 mv fastqc_summary.txt ../
 cd ..
+
 
 #Qiime2 Analysis
 
@@ -95,17 +98,17 @@ qiime metadata tabulate \
 #Denoising
 #Using deblur
 #The trim length is determined using the demux-filter-stats.qzv results
-qiime deblur denoise-16S \
---i-demultiplexed-seqs demux-filtered.qza \
---p-trim-length 120 \
---o-representative-sequences rep-seqs.qza \
---o-table deblur-table.qza \
---p-sample-stats \
---o-stats deblur-stats.qza
+#qiime deblur denoise-16S \
+#--i-demultiplexed-seqs demux-filtered.qza \
+#--p-trim-length 120 \
+#--o-representative-sequences rep-seqs.qza \
+#--o-table deblur-table.qza \
+#--p-sample-stats \
+#--o-stats deblur-stats.qza
 
-qiime deblur visualize-stats \
---i-deblur-stats  deblur-stats.qza \
---o-visualization deblur-stats.qzv
+#qiime deblur visualize-stats \
+#--i-deblur-stats  deblur-stats.qza \
+#--o-visualization deblur-stats.qzv
 
 #Adding metadata and examining count tables
 qiime feature-table summarize \
@@ -119,16 +122,26 @@ qiime feature-table tabulate-seqs \
 
 
 #Using dada2
-#qiime dada2 denoise-paired \
-#--i-demultiplexed-seqs demux.qza \
-#--o-table dada2-table.qza \
-#--o-representative-sequences rep-seqs-dada2.qza \
-#--p-trim-left-f 9 \
-#--p-trim-left-r 9 \
-#--p-trunc-len-f 220 \
-#--p-trunc-len-r 200 \
-#--p-n-threads 0
+qiime dada2 denoise-paired \
+--i-demultiplexed-seqs PE_demux.qza \
+--o-table dada2-table.qza \
+--o-denoising-stats dada2.stats.qza
+--o-representative-sequences rep-seqs-dada2.qza \
+--p-trim-left-f 9 \
+--p-trim-left-r 9 \
+--p-trunc-len-f 220 \
+--p-trunc-len-r 200 \
+--p-n-threads 0
 
+#Adding metadata and examining count tables
+qiime feature-table summarize \
+--i-table dada2-table.qza \
+--o-visualization dada2-table.qzv \
+--m-sample-metadata-file practice.dataset1.metadata.tsv
+
+qiime feature-table tabulate-seqs \
+--i-data rep-seqs-dada2.qza \
+--o-visualization rep-seqs-dada2.qzv
 
 #Phylogenetics
 #The next steps assumes using deblur in the previous steps
@@ -136,17 +149,17 @@ qiime feature-table tabulate-seqs \
 
 #Alignment
 qiime alignment mafft \
---i-sequences rep-seqs.qza \
---o-alignment aligned-rep-seqs.qza
+--i-sequences rep-seqs-dada2.qza \
+--o-alignment aligned-rep-seqs-dada2.qza
 
 #Masking
 qiime alignment mask \
---i-alignment aligned-rep-seqs.qza \
---o-masked-alignment masked-aligned-rep-seqs.qza
+--i-alignment aligned-rep-seqs-dada2.qza \
+--o-masked-alignment masked-aligned-rep-seqs-dada2.qza
 
 #Tree
 qiime phylogeny fasttree \
---i-alignment masked-aligned-rep-seqs.qza \
+--i-alignment masked-aligned-rep-seqs-dada2.qza \
 --o-tree unrooted-tree.qza
 
 #Midpoint rooting
@@ -159,7 +172,7 @@ qiime phylogeny midpoint-root \
 #Pick a sampling depth that works well for your samples
 qiime diversity core-metrics-phylogenetic \
 --i-phylogeny rooted-tree.qza \
---i-table deblur-table.qza \
+--i-table dada2-table.qza \
 --p-sampling-depth 800 \
 --m-metadata-file practice.dataset1.metadata.tsv \
 --output-dir metrics
@@ -195,7 +208,7 @@ qiime emperor plot \
 #Alpha rare-faction
 #Pick whatever sampling depth is ideal for your samples
 qiime diversity alpha-rarefaction \
---i-table deblur-table.qza \
+--i-table dada2-table.qza \
 --i-phylogeny rooted-tree.qza \
 --p-max-depth 4000 \
 --m-metadata-file practice.dataset1.metadata.tsv \
@@ -225,18 +238,20 @@ qiime diversity beta-group-significance \
 #Train your classifier using either SILVA or Greengenes
 #DONT USE BOTH!
 
-#Train classifier using SILVA
-#bash ../scripts/train_classifier_silva.sh
-
 cd ..
 
+#Train classifier using SILVA
+#bash scripts/train_classifier_silva.sh
+
 #Train Classifier using Greengenes
-bash ../scripts/train_classifier_gg.sh
+bash scripts/train_classifier_gg.sh
+
+cd sample_data/
 
 #Assign Taxonomy
 qiime feature-classifier classify-sklearn \
 --i-classifier classifier.qza \
---i-reads rep-seqs.qza \
+--i-reads rep-seqs-dada2.qza \
 --o-classification taxonomy.qza
 
 qiime metadata tabulate \
@@ -244,7 +259,7 @@ qiime metadata tabulate \
 --o-visualization taxonomy.qzv
 
 qiime taxa barplot \
---i-table deblur-table.qza \
+--i-table dada2-table.qza \
 --i-taxonomy taxonomy.qza \
 --m-metadata-file practice.dataset1.metadata.tsv \
 --o-visualization taxa-barplot.qzv
@@ -254,4 +269,5 @@ qiime taxa barplot \
 #You can utilize Phyloseq, an R package to Explore Microbiome profiles using R
 
 #Export to phyloseq objects
-bash ../scripts/phyloseq.sh
+cd ..
+bash scripts/phyloseq.sh

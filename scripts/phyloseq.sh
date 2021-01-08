@@ -4,6 +4,7 @@
 #in the event that you want to do your analysis with R.
 
 
+cd sample_data/
 # Export OTU table
 mkdir phyloseq
 qiime tools export \
@@ -17,7 +18,7 @@ biom convert \
 --to-tsv
 cd phyloseq
 sed -i '1d' otu_table.tsv
-sed -i 's/#OTU ID//' otu_table.tsv
+sed -i 's/OTU ID//' otu_table.tsv
 cd ../
 
 # Export representative sequences
@@ -47,5 +48,3 @@ qiime tools export \
 
 #Copy the metadata file into phyloseq too (required)
 cp practice.dataset1.metadata.tsv phyloseq/
-
-

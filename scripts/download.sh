@@ -42,3 +42,4 @@ wget http://h3data.cbio.uct.ac.za/assessments/16SrRNADiversityAnalysis/practice/
 
 wget http://h3data.cbio.uct.ac.za/assessments/16SrRNADiversityAnalysis/practice/practice.dataset1.metadata.tsv
 
+cd ..

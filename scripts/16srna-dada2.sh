@@ -111,27 +111,24 @@ qiime metadata tabulate \
 #--o-visualization deblur-stats.qzv
 
 #Adding metadata and examining count tables
-qiime feature-table summarize \
---i-table deblur-table.qza \
---o-visualization deblur-table.qzv \
---m-sample-metadata-file practice.dataset1.metadata.tsv
+#qiime feature-table summarize \
+#--i-table deblur-table.qza \
+#--o-visualization deblur-table.qzv \
+#--m-sample-metadata-file practice.dataset1.metadata.tsv
 
-qiime feature-table tabulate-seqs \
---i-data rep-seqs.qza \
---o-visualization rep-seqs.qzv
+#qiime feature-table tabulate-seqs \
+#--i-data rep-seqs.qza \
+#--o-visualization rep-seqs.qzv
 
 
 #Using dada2
 qiime dada2 denoise-paired \
 --i-demultiplexed-seqs PE_demux.qza \
---o-table dada2-table.qza \
---o-denoising-stats dada2.stats.qza
---o-representative-sequences rep-seqs-dada2.qza \
---p-trim-left-f 9 \
---p-trim-left-r 9 \
---p-trunc-len-f 220 \
+--p-trunc-len-f 250 \
 --p-trunc-len-r 200 \
---p-n-threads 0
+--o-table dada2-table.qza \
+--o-representative-sequences rep-seqs-dada2.qza \
+--o-denoising-stats dada2-denoise-stats.qza
 
 #Adding metadata and examining count tables
 qiime feature-table summarize \

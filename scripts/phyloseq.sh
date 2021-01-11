@@ -2,7 +2,7 @@
 
 #This script helps to export your qiime2-created files into formats that are read easily in R
 #in the event that you want to do your analysis with R.
-
+#If you used Dada2, remember to change files accordingly.
 
 cd sample_data/
 # Export OTU table

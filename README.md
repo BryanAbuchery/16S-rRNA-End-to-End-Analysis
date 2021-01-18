@@ -77,7 +77,7 @@ In a computational resource-challenged environment, move the the scripts directo
 
 1. [Moving pictures tutorial](https://docs.qiime2.org/2020.11/tutorials/moving-pictures/)
 
-2. [QIIME2 16S rRNA Analysis tutorial](chrome-extension://gphandlahdpffmccakmbngmbjnjiiahp/http://compbio.ucsd.edu/wp-content/uploads/2016/10/20170712_microbiome_16s_tutorial_non-interactive.pdf)
+2. [QIIME2 16S rRNA Analysis tutorial](http://compbio.ucsd.edu/wp-content/uploads/2016/10/20170712_microbiome_16s_tutorial_non-interactive.pdf)
 
 3. [QIIME2 data analysis tutorial](https://docs.qiime2.org/2020.11/tutorials/overview/)
 
